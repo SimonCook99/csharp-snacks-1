@@ -1,4 +1,23 @@
 ﻿
+
+//SNACK 10, generare N array con numeri casuali, dove N è chiesto dall'utente
+Console.Write("Quanti array vuoi generare? ");
+int numeroArray = int.Parse(Console.ReadLine());
+
+int[] arrayNumeri;
+
+for(int i = 0; i < numeroArray; i++){
+    arrayNumeri = new int[10];
+    for(int j = 0; j < arrayNumeri.Length; j++){
+        arrayNumeri[j] = new Random().Next(1, 101);
+
+        Console.WriteLine(arrayNumeri[j] + "\t");
+    }
+
+    Console.WriteLine();
+}
+
+return;
 //SNACK 5, chiediamo un numero all'utente: se è pari lo stampo altrimenti stampo il successivo
 Console.Write("Inserisci un numero");
 int numeroUtente = int.Parse(Console.ReadLine());
