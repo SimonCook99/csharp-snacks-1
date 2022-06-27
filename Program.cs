@@ -1,33 +1,44 @@
-﻿string[] listaOpzioni = { "sasso", "carta", "forbici" };
+﻿
+//SNACK GIOCO SASSO CARTA FORBICI
+string[] listaOpzioni = { "sasso", "carta", "forbici" };
 string sceltaUtente = "";
 
 Console.WriteLine("Giochiamo a sasso-carta-forbici :)");
+
+//chiedo all'utente quante partite fare
 Console.WriteLine("quante partite vuoi fare?");
 int numeroPartite = int.Parse(Console.ReadLine());
-int contatore = 1;
+
+int contatore = 0; //contatore che tiene traccia della partita corrente
+
 int punteggioUtente = 0, punteggioComputer = 0;
 
+//i 2 array conterranno le rispettive mosse fatte dall'utente e dal PC
 string[] listaMosseUtente = new string[numeroPartite];
 string[] listaMossePC = new string[numeroPartite];
 
+
+//Proseguirò nel programma solo quando viene scritto un valore corretto
 while (!listaOpzioni.Contains(sceltaUtente)){
 
     Console.WriteLine("Inserisci la tua scelta: sasso, carta o forbici?");
     sceltaUtente = Console.ReadLine();
 }
 
+
 while(contatore < numeroPartite){
 
+    //estraggo un indice casuale, per randomizzare la scelta del computer
     int sceltaComputer = new Random().Next(0, listaOpzioni.Length);
 
     listaMossePC[contatore] = listaOpzioni[sceltaComputer];
     listaMosseUtente[contatore] = sceltaUtente;
-
+    
     contatore++;
 
     Console.WriteLine(listaOpzioni[sceltaComputer]);
 
-
+    //bool di logica per il calcolo della vittoria o sconfitta
     bool vittoriaCarta = sceltaUtente == "carta" && listaOpzioni[sceltaComputer] == "sasso";
     bool vittoriaSasso = sceltaUtente == "sasso" && listaOpzioni[sceltaComputer] == "forbici";
     bool vittoriaForbici = sceltaUtente == "forbici" && listaOpzioni[sceltaComputer] == "carta";
@@ -35,46 +46,51 @@ while(contatore < numeroPartite){
     if (sceltaUtente == listaOpzioni[sceltaComputer]){
         Console.WriteLine("Abbiamo scelto la stessa cosa, parità");
         
-        Console.WriteLine("Ora cosa scegli: sasso, carta o forbici?");
-        sceltaUtente = Console.ReadLine();
+        if(contatore != numeroPartite){
+            Console.WriteLine("Ora cosa scegli: sasso, carta o forbici?");
+            sceltaUtente = Console.ReadLine();
+        }
     }
     else{
         if(vittoriaCarta || vittoriaSasso || vittoriaForbici){
             Console.WriteLine("Hai vinto!!");
             punteggioUtente++;
 
-            Console.WriteLine("Ora cosa scegli: sasso, carta o forbici?");
-            sceltaUtente = Console.ReadLine();
+            if (contatore != numeroPartite){
+                Console.WriteLine("Ora cosa scegli: sasso, carta o forbici?");
+                sceltaUtente = Console.ReadLine();
+            }
         }
         else{
             Console.WriteLine("Ha vinto il computer");
             punteggioComputer++;
 
-            Console.WriteLine("Ora cosa scegli: sasso, carta o forbici?");
-            sceltaUtente = Console.ReadLine();
+            if (contatore != numeroPartite){
+                Console.WriteLine("Ora cosa scegli: sasso, carta o forbici?");
+                sceltaUtente = Console.ReadLine();
+            }
         }
     }
 }
 
+//alla fine di tutti i match vediamo chi ha vinto in base al punteggio
 if (punteggioUtente > punteggioComputer)
 {
-    Console.WriteLine("Complimenti, mi hai battuto");
+    Console.WriteLine("\nComplimenti, mi hai battuto");
 }
 else if (punteggioUtente < punteggioComputer){
-    Console.WriteLine("HAHAHAHA ti ho battuto");
+    Console.WriteLine("\nHAHAHAHA ti ho battuto");
 }
 else{
-    Console.WriteLine("abbiamo pareggiato");
+    Console.WriteLine("\nabbiamo pareggiato");
 }
 
+//resoconto finale dove mostro anche tutte le mosse fatte
 for(int i = 0; i < listaMosseUtente.Length; i++){
-    Console.WriteLine("Queste sono le tue mosse: " + listaMosseUtente[i]);
+    Console.WriteLine($"Partita {i}: \t la tua mossa: {listaMosseUtente[i]} \t la mossa del PC: {listaMossePC[i]} ");
 }
 
-for (int i = 0; i < listaMossePC.Length; i++)
-{
-    Console.WriteLine("Queste sono le mosse del PC: " + listaMossePC[i]);
-}
+
 
 
 
