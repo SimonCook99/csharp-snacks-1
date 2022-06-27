@@ -1,5 +1,38 @@
-﻿
+﻿string[] listaOpzioni = { "sasso", "carta", "forbici" };
+string sceltaUtente = "";
 
+Console.WriteLine("Giochiamo a sasso-carta-forbici :)");
+
+while (!listaOpzioni.Contains(sceltaUtente)){
+
+    Console.WriteLine("Inserisci la tua scelta: sasso, carta o forbici?");
+    sceltaUtente = Console.ReadLine();
+}
+
+int sceltaComputer = new Random().Next(0, listaOpzioni.Length);
+Console.WriteLine(listaOpzioni[sceltaComputer]);
+
+bool vittoriaCarta = sceltaUtente == "carta" && listaOpzioni[sceltaComputer] == "sasso";
+bool vittoriaSasso = sceltaUtente == "sasso" && listaOpzioni[sceltaComputer] == "forbici";
+bool vittoriaForbici = sceltaUtente == "forbici" && listaOpzioni[sceltaComputer] == "carta";
+
+if (sceltaUtente == listaOpzioni[sceltaComputer]){
+    Console.WriteLine("Abbiamo scelto la stessa cosa, parità");
+}
+else{
+    if(vittoriaCarta || vittoriaSasso || vittoriaForbici){
+        Console.WriteLine("Hai vinto!!");
+    }
+    else{
+        Console.WriteLine("Ha vinto il computer");
+    }
+}
+
+
+
+
+
+return;
 //SNACK 10, generare N array con numeri casuali, dove N è chiesto dall'utente
 Console.Write("Quanti array vuoi generare? ");
 int numeroArray = int.Parse(Console.ReadLine());
