@@ -4,8 +4,11 @@ string sceltaUtente = "";
 Console.WriteLine("Giochiamo a sasso-carta-forbici :)");
 Console.WriteLine("quante partite vuoi fare?");
 int numeroPartite = int.Parse(Console.ReadLine());
-int contatore = 0;
+int contatore = 1;
 int punteggioUtente = 0, punteggioComputer = 0;
+
+string[] listaMosseUtente = new string[numeroPartite];
+string[] listaMossePC = new string[numeroPartite];
 
 while (!listaOpzioni.Contains(sceltaUtente)){
 
@@ -15,10 +18,15 @@ while (!listaOpzioni.Contains(sceltaUtente)){
 
 while(contatore < numeroPartite){
 
+    int sceltaComputer = new Random().Next(0, listaOpzioni.Length);
+
+    listaMossePC[contatore] = listaOpzioni[sceltaComputer];
+    listaMosseUtente[contatore] = sceltaUtente;
+
     contatore++;
 
-    int sceltaComputer = new Random().Next(0, listaOpzioni.Length);
     Console.WriteLine(listaOpzioni[sceltaComputer]);
+
 
     bool vittoriaCarta = sceltaUtente == "carta" && listaOpzioni[sceltaComputer] == "sasso";
     bool vittoriaSasso = sceltaUtente == "sasso" && listaOpzioni[sceltaComputer] == "forbici";
@@ -57,6 +65,15 @@ else if (punteggioUtente < punteggioComputer){
 }
 else{
     Console.WriteLine("abbiamo pareggiato");
+}
+
+for(int i = 0; i < listaMosseUtente.Length; i++){
+    Console.WriteLine("Queste sono le tue mosse: " + listaMosseUtente[i]);
+}
+
+for (int i = 0; i < listaMossePC.Length; i++)
+{
+    Console.WriteLine("Queste sono le mosse del PC: " + listaMossePC[i]);
 }
 
 
