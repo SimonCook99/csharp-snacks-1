@@ -1,5 +1,17 @@
 ﻿
+//SNACK 5, chiediamo un numero all'utente: se è pari lo stampo altrimenti stampo il successivo
+Console.Write("Inserisci un numero");
+int numeroUtente = int.Parse(Console.ReadLine());
 
+if(numeroUtente % 2 == 0){
+    Console.WriteLine("Hai inserito " + numeroUtente);
+}
+else{
+    Console.WriteLine($"Il numero successivo a quello inserito è: {numeroUtente + 1}");
+}
+
+
+return;
 //SNACK 4, somma e media dei numeri da 2 a 10
 int[] listaNumeri = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 int sommaNumeri = 0;
