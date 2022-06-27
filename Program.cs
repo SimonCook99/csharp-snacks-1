@@ -2,6 +2,10 @@
 string sceltaUtente = "";
 
 Console.WriteLine("Giochiamo a sasso-carta-forbici :)");
+Console.WriteLine("quante partite vuoi fare?");
+int numeroPartite = int.Parse(Console.ReadLine());
+int contatore = 0;
+int punteggioUtente = 0, punteggioComputer = 0;
 
 while (!listaOpzioni.Contains(sceltaUtente)){
 
@@ -9,23 +13,50 @@ while (!listaOpzioni.Contains(sceltaUtente)){
     sceltaUtente = Console.ReadLine();
 }
 
-int sceltaComputer = new Random().Next(0, listaOpzioni.Length);
-Console.WriteLine(listaOpzioni[sceltaComputer]);
+while(contatore < numeroPartite){
 
-bool vittoriaCarta = sceltaUtente == "carta" && listaOpzioni[sceltaComputer] == "sasso";
-bool vittoriaSasso = sceltaUtente == "sasso" && listaOpzioni[sceltaComputer] == "forbici";
-bool vittoriaForbici = sceltaUtente == "forbici" && listaOpzioni[sceltaComputer] == "carta";
+    contatore++;
 
-if (sceltaUtente == listaOpzioni[sceltaComputer]){
-    Console.WriteLine("Abbiamo scelto la stessa cosa, parità");
-}
-else{
-    if(vittoriaCarta || vittoriaSasso || vittoriaForbici){
-        Console.WriteLine("Hai vinto!!");
+    int sceltaComputer = new Random().Next(0, listaOpzioni.Length);
+    Console.WriteLine(listaOpzioni[sceltaComputer]);
+
+    bool vittoriaCarta = sceltaUtente == "carta" && listaOpzioni[sceltaComputer] == "sasso";
+    bool vittoriaSasso = sceltaUtente == "sasso" && listaOpzioni[sceltaComputer] == "forbici";
+    bool vittoriaForbici = sceltaUtente == "forbici" && listaOpzioni[sceltaComputer] == "carta";
+
+    if (sceltaUtente == listaOpzioni[sceltaComputer]){
+        Console.WriteLine("Abbiamo scelto la stessa cosa, parità");
+        
+        Console.WriteLine("Ora cosa scegli: sasso, carta o forbici?");
+        sceltaUtente = Console.ReadLine();
     }
     else{
-        Console.WriteLine("Ha vinto il computer");
+        if(vittoriaCarta || vittoriaSasso || vittoriaForbici){
+            Console.WriteLine("Hai vinto!!");
+            punteggioUtente++;
+
+            Console.WriteLine("Ora cosa scegli: sasso, carta o forbici?");
+            sceltaUtente = Console.ReadLine();
+        }
+        else{
+            Console.WriteLine("Ha vinto il computer");
+            punteggioComputer++;
+
+            Console.WriteLine("Ora cosa scegli: sasso, carta o forbici?");
+            sceltaUtente = Console.ReadLine();
+        }
     }
+}
+
+if (punteggioUtente > punteggioComputer)
+{
+    Console.WriteLine("Complimenti, mi hai battuto");
+}
+else if (punteggioUtente < punteggioComputer){
+    Console.WriteLine("HAHAHAHA ti ho battuto");
+}
+else{
+    Console.WriteLine("abbiamo pareggiato");
 }
 
 
